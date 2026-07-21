@@ -2,7 +2,7 @@
 # mod arithmetic math helpers for proj
 
 
-
+# extended ecludian algo
 def egcd(a, b):
     old_r, r = a, b
     old_s, s = 1, 0
@@ -52,7 +52,7 @@ def integer_nth_root(x, n):
             return candidate, True
     return lo - 1, False
 
-
+# chinese remainder theorem
 def crt(residues, moduli):
     if len(residues) != len(moduli):
         raise ValueError("residues and moduli must be the same length")

@@ -6,7 +6,7 @@ _SMALL_PRIMES = [
     71, 73, 79, 83, 89, 97,
 ]
 
-
+# miller-rabin primality
 def is_probable_prime(n, rounds=40):
     if n < 2:
         return False
