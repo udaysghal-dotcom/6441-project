@@ -27,10 +27,10 @@ def generate_keypair(bits=2048, e=PUBLIC_EXPONENT):
             continue
         n = p * q
         phi = (p - 1) * (q - 1)
-        # try:
-        #     d = modinv(e, phi)
-        # except ValueError:
-        #     continue
+        try:
+            d = modinv(e, phi)
+        except ValueError:
+            continue
         return PublicKey(n, e), PrivateKey(n, d, p, q)
 
 
