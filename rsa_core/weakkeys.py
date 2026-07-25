@@ -4,7 +4,6 @@ from .modmath import modinv
 from .primes import generate_prime, is_probable_prime
 from .keygen import PublicKey, PrivateKey, PUBLIC_EXPONENT
 
-
 def close_prime_key(bits=1024, gap=1000, e=PUBLIC_EXPONENT):
     half = bits // 2
     while True:
@@ -25,7 +24,6 @@ def close_prime_key(bits=1024, gap=1000, e=PUBLIC_EXPONENT):
             continue
         return PublicKey(n, e), PrivateKey(n, d, p, q)
 
-
 def small_d_key(bits=1024, d_bits=None):
     half = bits // 2
     if d_bits is None:
@@ -45,7 +43,6 @@ def small_d_key(bits=1024, d_bits=None):
         except ValueError:
             continue
         return PublicKey(n, e), PrivateKey(n, d, p, q)
-
 
 def small_e_keys(bits=1024, e=3, count=3):
     keys = []
@@ -69,7 +66,6 @@ def small_e_keys(bits=1024, e=3, count=3):
         moduli.add(n)
         keys.append((PublicKey(n, e), PrivateKey(n, d, p, q)))
     return keys
-
 
 def shared_prime_keys(bits=1024, num_keys=10, num_shared=2):
     half = bits // 2
