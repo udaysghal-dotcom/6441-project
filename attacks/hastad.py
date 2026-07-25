@@ -1,8 +1,5 @@
-from math import gcd
-
-from rsa_core.modmath import crt, integer_nth_root, mod_exp, modinv
-from rsa_core.primes import generate_prime
-
+from rsa_core.modmath import crt, integer_nth_root, mod_exp
+from rsa_core.weakkeys import small_e_keys
 
 def hastad_broadcast(ciphertexts, moduli, e):
     # need at least e ciphertext/modulus pairs
@@ -16,28 +13,13 @@ def hastad_broadcast(ciphertexts, moduli, e):
         return None
     return root
 
-
 if __name__ == "__main__":
     e = 3
     m_original = 42424242
 
-    # generate 3 keypairs with e=3 and pairwise coprime moduli
-    keys = []
-    for _ in range(e):
-        half = 256
-        while True:
-            p = generate_prime(half)
-            q = generate_prime(half)
-            if p != q:
-                n = p * q
-                phi = (p - 1) * (q - 1)
-                # e must be coprime with phi
-                if gcd(e, phi) == 1:
-                    d = modinv(e, phi)
-                    keys.append((n, d))
-                    break
-
-    moduli = [k[0] for k in keys]
+    # e keypairs sharing the small public exponent e, pairwise coprime moduli
+    keys = small_e_keys(bits=512, e=e, count=e)
+    moduli = [pub.n for pub, _ in keys]
     ciphertexts = [mod_exp(m_original, e, n) for n in moduli]
 
     m_recovered = hastad_broadcast(ciphertexts, moduli, e)
