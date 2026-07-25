@@ -1,5 +1,7 @@
 import math
 
+from rsa_core.weakkeys import close_prime_key
+
 def fermat_factor(n, max_iterations=None):
     if n <= 0:
         raise ValueError("n must be a positive integer")
@@ -23,14 +25,11 @@ def fermat_factor(n, max_iterations=None):
 
     return None
 
-
 if __name__ == "__main__":
-    # manual test with two close primes
-    p = 1000000007
-    q = 1000000009
-    n = p * q
-    result = fermat_factor(n)
+    # weak key with a small gap between p and q
+    pub, priv = close_prime_key(bits=512, gap=1000)
+    result = fermat_factor(pub.n)
     assert result is not None
     fp, fq = result
-    assert {fp, fq} == {p, q}, (fp, fq)
-    print(f"recovered factors: {fp} * {fq} == {n}")
+    assert {fp, fq} == {priv.p, priv.q}, (fp, fq)
+    print(f"recovered factors: {fp} * {fq} == {pub.n}")
