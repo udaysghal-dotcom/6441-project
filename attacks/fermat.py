@@ -1,6 +1,5 @@
 import math
 
-
 def fermat_factor(n, max_iterations=None):
     if n <= 0:
         raise ValueError("n must be a positive integer")

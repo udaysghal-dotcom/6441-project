@@ -1,10 +1,6 @@
-import sys, os
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
-
 from math import gcd
 
 from rsa_core.modmath import crt, integer_nth_root, mod_exp, modinv
-from rsa_core.keygen import generate_keypair
 from rsa_core.primes import generate_prime
 
 

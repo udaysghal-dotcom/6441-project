@@ -1,10 +1,5 @@
-import sys, os
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
-
 from rsa_core.modmath import egcd, modinv, mod_exp
-from rsa_core.keygen import generate_keypair, encrypt_int
-
-
+from rsa_core.keygen import generate_keypair
 
 def common_modulus_attack(n, e1, e2, c1, c2):
     g, u, v = egcd(e1, e2)

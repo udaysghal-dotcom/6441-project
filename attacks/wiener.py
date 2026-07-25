@@ -1,8 +1,5 @@
-import sys, os
 import math
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
-
-from rsa_core.modmath import modinv, mod_exp
+from rsa_core.modmath import modinv
 from rsa_core.primes import generate_prime
 
 
