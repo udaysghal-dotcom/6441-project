@@ -11,7 +11,7 @@ def test_fermat_recovers_close_primes():
     assert {fp, fq} == {priv.p, priv.q}
     assert fp * fq == pub.n
 
-# negative: a proper key has a large prime gap so a bounded run gives up
+# negative: a proper key has a large prime gap 
 def test_fermat_fails_on_correct_key():
     pub, _ = generate_keypair(bits=512)
     assert fermat_factor(pub.n, max_iterations=2000) is None

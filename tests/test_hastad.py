@@ -13,15 +13,6 @@ def test_hastad_recovers_broadcast_message():
     ciphertexts = [mod_exp(m, e, n) for n in moduli]
     assert hastad_broadcast(ciphertexts, moduli, e) == m
 
-# negative: OAEP gives each recipient a different padded plaintext, so the combined value is not a perfect e-th power and recovery fails
-def test_hastad_fails_against_oaep():
-    e = 3
-    msg = b"spain one zero"
-    keys = small_e_keys(bits=1024, e=e, count=e)
-    moduli = [pub.n for pub, _ in keys]
-    ciphertexts = [int.from_bytes(encrypt(pub, msg), "big") for pub, _ in keys]
-    assert hastad_broadcast(ciphertexts, moduli, e) is None
-
 # negative: fewer than e recipients cannot be attacked
 def test_hastad_requires_enough_recipients():
     e = 3
@@ -30,3 +21,12 @@ def test_hastad_requires_enough_recipients():
     ciphertexts = [mod_exp(42, e, n) for n in moduli]
     with pytest.raises(ValueError):
         hastad_broadcast(ciphertexts[:2], moduli[:2], e)
+
+# negative: oaep gives each recipient a different padded plaintext
+def test_hastad_fails_against_oaep():
+    e = 3
+    msg = b"spain one zero"
+    keys = small_e_keys(bits=1024, e=e, count=e)
+    moduli = [pub.n for pub, _ in keys]
+    ciphertexts = [int.from_bytes(encrypt(pub, msg), "big") for pub, _ in keys]
+    assert hastad_broadcast(ciphertexts, moduli, e) is None

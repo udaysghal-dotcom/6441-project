@@ -22,7 +22,7 @@ def test_modinv_roundtrip():
         try:
             inv = modinv(a, m)
         except ValueError:
-            continue  # not invertible, fine
+            continue  
         assert (a * inv) % m == 1
 
 def test_mod_exp_matches_builtin():
