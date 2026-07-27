@@ -1,8 +1,4 @@
-
-# mod arithmetic math helpers for proj
-
-
-# extended ecludian algo
+# Extended euclidean algorithm
 def egcd(a, b):
     old_r, r = a, b
     old_s, s = 1, 0

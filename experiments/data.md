@@ -1,5 +1,5 @@
 The following is the data I used for section 4.4 - Experimental Evaluation and Results. 
-Data was acquired by running the experiment scripts, and copying the results that were outputed in the terminal. You can recreate the outputs by running: "python3 experiments/exp_*"   
+Data was acquired by running the experiment scripts, and copying the results that were outputed in the terminal. You can recreate the experiments by running: "python3 experiments/exp_*"   
 
 === BATCH-GCD VS NAIVE PAIRWISE SCALING ===
 Corpus_Size     Naive_Time_Sec  Batch_Time_Sec  Speedup
